@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
   app.use(express.static('client/build'));
 
   app.listen(3000, function(){
-    console.log('Running smoothly on port: '+this.address().port)
+    console.log('Running like a puppy on port: '+this.address().port)
   });
 
 

@@ -3,6 +3,7 @@
   background-color: transparent;
   border-radius: 3px;
   padding: 8px;
+  margin-right: 19px;
   color: #fff;
   border: 1px solid #fff;
   text-align: center;
@@ -20,7 +21,18 @@
               color 0.3s ease-in;
 }
 
+#countries-list {
+  margin-top: 30px;
+  text-align: center;
+  text-align-last: center;
+}
+
+option {
+  text-align: center;
+}
 
 body {
   background-color: skyblue;
 }
+
+/*////////////////////////*/

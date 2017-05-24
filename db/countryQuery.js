@@ -16,7 +16,20 @@ CountryQuery.prototype = {
         });
       }
     });
+  },
+
+  add: function(countryToAdd, onQueryFinshed){
+    MongoClient.connect(this.url, function(err, db){
+      if (db){
+        var collection = db.collection('countries');
+        collection.insert(countryToAdd);
+        collection.find().toArray(function(err,docs){
+          console.log(docs);
+          onQueryFinshed(docs);
+        });
+      };
+    })
   }
-}
+};
 
 module.exports = CountryQuery;
