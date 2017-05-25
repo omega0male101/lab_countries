@@ -3,9 +3,12 @@ var countries = new Countries;
 
 var init = function(){
   var url = "https://restcountries.eu/rest/v2";
+  var bucketListUrl = "mogodb://localhost:27017/api/countries";
   var button = document.getElementById("submit-button");
   button.addEventListener('click', handleButtonClick);
   makeRequest(url, requestComplete);
+  makeRequest(bucketListUrl, requestBucketComplete)
+
 }
 
 var handleButtonClick = function(){
@@ -19,6 +22,7 @@ var handleButtonClick = function(){
   }.bind(this))
   li.innerText = selection.value;
   ul.appendChild(li)
+
 }
 
 var makeRequest = function(url, callback){
@@ -37,6 +41,15 @@ var requestComplete = function(){
   populateList(countriesObj)
 }
 
+var requestBucketComplete = function(){
+  if(this.status !== 200) return;
+  var jsonString = this.responseText;
+  var countriesObj = JSON.parse(jsonString);
+  // var country = countriesObj.;
+  console.log(countriesObj)
+  populateBucketList(countriesObj)
+}
+
 var populateList = function(countries){
   var select = document.querySelector('#countries-list');
   countries.forEach(function(country){
@@ -44,6 +57,16 @@ var populateList = function(countries){
     var optionTag = document.createElement("option");
     optionTag.innerText = country.name
     select.appendChild(optionTag);
+  });
+}
+
+var populateBucketList = function(countries){
+  var select = document.querySelector('#ul-bucket');
+  countries.forEach(function(country){
+
+    var liTag = document.createElement("li");
+    liTag.innerText = country.name
+    select.appendChild(liTag);
   });
 }
 
